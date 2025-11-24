@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* MATCHED COLOR PALETTE: Navy + Gold */
+            background: linear-gradient(135deg, #1b2341, #6b5424, #d4b46a);
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            padding: 35px 40px;
+            border-radius: 18px;
+            text-align: center;
+            width: 360px;
+
+            animation: fadeIn 1.5s ease-out;
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.55);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: gold;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: gold;
+            box-shadow: 0 0 8px gold;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: gold;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 17px;
+            border-radius: 10px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: white;
+        }
+
+        /* Floating soft lights */
+        .light {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+            filter: blur(3px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-40px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.5; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Lights for animation -->
+<div class="light" style="width:120px;height:120px;top:10%;left:15%;animation-duration:9s;"></div>
+<div class="light" style="width:90px;height:90px;bottom:15%;right:20%;animation-duration:7s;"></div>
+<div class="light" style="width:70px;height:70px;top:50%;right:10%;animation-duration:10s;"></div>
+
+<div class="login-box">
+    <h2>Welcome</h2>
+
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="Enter Username" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+</body>
+</html>

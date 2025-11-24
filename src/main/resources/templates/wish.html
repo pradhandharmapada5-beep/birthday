@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday Wish</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            /* Background matching your image colors (gold + navy) */
+            background: linear-gradient(135deg, #1b2341, #8b6f2b, #d4b46a);
+            background-size: 400% 400%;
+            animation: bgAnimation 12s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.6);
+            animation: fadeIn 1.5s ease-in-out;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.9);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 0px 0px 10px gold;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            background: gold;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logout + Music Control -->
+<div class="top-right">
+    <form action="/logout" method="post">
+        <button class="btn">Logout</button>
+    </form>
+    <button class="btn" onclick="toggleMusic()">Mute</button>
+</div>
+
+<!-- Music -->
+<audio id="bgMusic" autoplay loop>
+    <source src="/happybirthday.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <img th:src="@{${photo}}" alt="Birthday Photo">
+
+    <h1 th:text="${name} + ', Wishing you a very Happy Birthday! 🎉'"></h1>
+    <p th:text="${message}"></p>
+</div>
+
+<script>
+    let isMuted = false;
+    const music = document.getElementById("bgMusic");
+
+    function toggleMusic() {
+        isMuted = !isMuted;
+        music.muted = isMuted;
+        event.target.innerText = isMuted ? "Unmute" : "Mute";
+    }
+</script>
+
+</body>
+</html>
